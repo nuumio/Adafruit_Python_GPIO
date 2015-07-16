@@ -92,9 +92,20 @@ class Device(object):
         """Create an instance of the I2C device at the specified address on the
         specified I2C bus number."""
         self._address = address
+        self._busnum = busnum
         self._bus = smbus.SMBus(busnum)
         self._logger = logging.getLogger('Adafruit_I2C.Device.Bus.{0}.Address.{1:#0X}' \
                                 .format(busnum, address))
+
+    @property
+    def address(self):
+        """Device's I2C address on I2C bus."""
+        return self._address
+
+    @property
+    def bus(self):
+        """Devices' I2C bus number."""
+        return self._busnum
 
     def writeRaw8(self, value):
         """Write an 8-bit value on the bus (without register)."""
